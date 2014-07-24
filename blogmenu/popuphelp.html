@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Nucleus Plugin Management Help</title>
+	<style type="text/css">
+	<!--
+		body {
+			font-family: verdana, arial;
+			font-size: small;
+		}
+
+		h1 {
+			font-size: large;
+			border-bottom: 1px gray dashed;
+			color: #596d9d;
+			text-align: left;
+		}
+
+		h2 {
+			font-size: medium;
+			border: 1px solid #ddd;
+			background-color: whitesmoke;
+			text-align: left;
+		}
+
+		.page {
+			height: 800px;
+			margin-bottom: 100px;
+		}
+
+		pre {
+			background-color: #ddd;
+			padding: 5px;
+			font-size: small;
+		}
+
+		.example {
+			background-color: #ddd;
+			padding: 5px;
+		}
+
+		ul.templates {
+			font-size: x-small;
+			line-height: 1.1;
+			list-style: none;
+			text-indent: -20px;
+			margin-left: 20px;
+		}
+
+		ul {
+			text-align: left;
+		}
+
+		a:link, a:visited {
+			color: #1D3565;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+
+		a:hover {
+			background-color: whitesmoke;
+		}
+
+		.deprecated {
+			border: 3px solid red;
+			padding: 5px;
+			font-size: medium;
+		}
+
+		tt, code {
+			font-size: small;
+		}
+
+		table {
+			border: 1px solid #ccc;
+		}
+
+		th {
+			background-color: #eee;
+		}
+
+		td {
+			vertical-align: top;
+		}
+
+		.note {
+			background-color: #eee;
+			padding: 5px;
+		}
+		
+		.var {
+		    white-space:nowrap;
+		}
+	-->
+	</style>
+</head>
+<body>
+
+<div class="page">
+<h1>Nucleus Plugin Popup Help</h1>
+</div>
+
+
+<div class="page">
+<a name="name"></a>
+<h1>Template Name</h1>
+
+<p>A template name consists of <strong>only</strong> the characters a-z and 0-9, and <strong>cannot</strong> contain spaces.</p>
+</div>
+
+
+<div class="page">
+<a name="bloglist"></a>
+<h1>Blog List Template</h1>
+
+<h2>Variables that can be used in all parts</h2>
+<table><tr>
+	<th>Template Var.</th>
+	<th>Description</th>
+</tr><tr>
+	<td>&lt;%skinfile%&gt;</td>
+	<td>URL of skin directory. You can use &lt;%skinfile(filename)%&gt; too.</td>
+</tr></table>
+
+<h2>Variables that can be used in blog list item</h2>
+<table><tr>
+	<th>Template Var.</th>
+	<th>Description</th>
+</tr><tr>
+	<td class="var">&lt;%blogid%&gt;</td>
+	<td>Blog ID</td>
+</tr><tr>
+	<td class="var">&lt;%bloglink%&gt;</td>
+	<td>Link of blog (only URL).</td>
+</tr><tr>
+	<td class="var">&lt;%archivedate%&gt;</td>
+	<td>Archivedate (in Archive skin)</td>
+</tr><tr>
+	<td class="var">&lt;%blogurl%&gt;</td>
+	<td>Blog URL set on &quot;Blog Settings&quot; page of Nucleus. If empty, it is replaced by default blog URL or $CONF['Self'].</td>
+</tr><tr>
+	<td class="var">&lt;%blogname%&gt;</td>
+	<td>Blog name</td>
+</tr><tr>
+	<td class="var">&lt;%bshortname%&gt;</td>
+	<td>Blog short name</td>
+</tr><tr>
+	<td class="var">&lt;%blogdesc%&gt;</td>
+	<td>Blog discription</td>
+</tr><tr>
+	<td>&lt;%flag%&gt;</td>
+	<td>The content of &quot;Blog List Flag&quot; is displayed in this part of current selected blog. 
+</td>
+</tr><tr>
+	<td class="var">&lt;%self%&gt;</td>
+	<td>Variable of $CONF['Self']</td>
+</tr><tr>
+	<td class="var">&lt;%%categorylist%%&gt;</td>
+	<td>Category list of the blog. (If the <a href="#module">module</a> is enabled.) Use &quot;%%&quot; insted of &quot;%&quot;. </td>
+</tr><tr>
+	<td class="var">&lt;%%PLUGIN NAME%%&gt;</td>
+	<td>BlogMenu calls another plugin.<br />
+	e.g. <code>&lt;%%PLUGIN NAME(OPTION1,OPTION2)%%&gt;</code><br />
+	Template variable of BlogMenu can be used for the option value. </td>
+</tr><tr>
+	<td class="var">&lt;%%+PLUGIN NAME%%&gt;</td>
+	<td>When "+" is put on the head, BlogMenu always calls the plugin. 
+</td>
+</tr></table>
+
+<h2>Variables that can be used in blog list flag</h2>
+<p>Same variables that can be used in blog list items except &lt;%flag%&gt; and other plugins.</p>
+</div>
+
+<div class="page">
+<a name="aliases"></a>
+<h1>Blog Aliases</h1>
+
+<p>BlogMenu prints the alias of a blog insted of the name. Put a line break between blogs. </p>
+<pre><code>blogid=aliase</code></pre>
+e.g.
+<pre><code>1=Home
+5=Apendix</code></pre>
+
+</div>
+
+<div class="page">
+<a name="categorylist"></a>
+<h1>Category List Template</h1>
+
+
+<h2>Variables that can be used in all parts</h2>
+<table><tr>
+	<th>Template Var.</th>
+	<th>Description</th>
+</tr><tr>
+	<td>&lt;%skinfile%&gt;</td>
+	<td>URL of skin directory. You can use &lt;%skinfile(filename)%&gt; too.</td>
+</tr><tr>
+	<td class="var">&lt;%blogid%&gt;</td>
+	<td>Blog ID</td>
+</tr><tr>
+	<td class="var">&lt;%bloglink%&gt;</td>
+	<td>Link of blog (only URL).</td>
+</tr><tr>
+	<td class="var">&lt;%archivedate%&gt;</td>
+	<td> </td>
+</tr><tr>
+	<td class="var">&lt;%blogurl%&gt;</td>
+	<td>Blog URL set on &quot;Blog Settings&quot; page of Nucleus. If empty, it is replaced by default blog URL or $CONF['Self'].</td>
+</tr><tr>
+	<td class="var">&lt;%blogname%&gt;</td>
+	<td>Blog name</td>
+</tr><tr>
+	<td class="var">&lt;%bshortname%&gt;</td>
+	<td>Blog short name</td>
+</tr><tr>
+	<td class="var">&lt;%blogdesc%&gt;</td>
+	<td>Blog discription</td>
+</tr><tr>
+	<td class="var">&lt;%self%&gt;</td>
+	<td>Variable of $CONF['Self']</td>
+</tr><tr>
+	<td class="var">&lt;%%PLUGIN NAME%%&gt;</td>
+	<td>BlogMenu calls another plugin. <br />
+	e.g. <code>&lt;%%PLUGIN NAME(OPTION1,OPTION2)%%&gt;</code><br />
+	Template variable of BlogMenu can be used for the option value. </td>
+</tr></table>
+
+<h2>Variables that can be used in category list item</h2>
+<table><tr>
+	<td class="var">&lt;%catid%&gt;</td>
+	<td>Category ID</td>
+</tr><tr>
+	<td class="var">&lt;%catlink%&gt;</td>
+	<td>Category link (only URL)</td>
+</tr><tr>
+	<td class="var">&lt;%catname%&gt;</td>
+	<td>Category name</td>
+</tr><tr>
+	<td class="var">&lt;%catdesc%&gt;</td>
+	<td>Category description</td>
+</tr><tr>
+	<td class="var">&lt;%amount%&gt;</td>
+	<td>Item amount of the category</td>
+</tr><tr>
+	<td>&lt;%catflag%&gt;</td>
+	<td>The content of &quot;Category List Flag&quot; is displayed in this part of current selected category.</td>
+</tr></table>
+
+<h2>Variables that can be used in category list flag</h2>
+<p>Same variables that can be used in category list items except &lt;%catflag%&gt; and other plugins.</p>
+</div>
+
+
+<div class=page>
+<a name="rank"></a>
+<h1>Display priority</h1>
+
+<p>The order of the display can be permuted. It's start from 1.</p>
+
+</div>
+
+<div class=page>
+<a name="module"></a>
+<h1>Module</h1>
+
+<p>It is possible to call it from the template as a module by putting the file of the PHP class according to the prescribed form on <code>blogmenu/modules</code> directory. 
+However, it is necessary to make it to &quot;Enable&quot; first. </p>
+
+</div>
+
+<div class=page>
+<a name="rankbasic"></a>
+<h1>Basic settings of display priority</h1>
+
+<dl>
+<dt>Default Priority Level</dt>
+<dd><p>New blog/category will be set to this priority.</p></dd>
+
+<dt>Maximum Priority Level</dt>
+<dd><p>Number of levels that can be chosen by the priority select list. (1 - 999)</p></dd>
+
+</dl>
+</div>
+

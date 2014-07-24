@@ -1,0 +1,127 @@
+<div class="section" id="overview">
+<h3>Plugin Overview</h3>
+
+<p>This plugin displays a blog list and the category list of each blog. Main features are as follows. </p>
+
+<ul>
+	<li>Creates link corresponding to plugin/$CONF['xxxKey'] that customizes URL. </li>
+	<li>The display order control and non-display setting of Blogs/categories.</li>
+	<li>Setting of blog that doesn't expand category list etc.(It is possible to display only the category list of current blog ).</li>
+	<li>Calls other plugins from BlogMenu template.</li>
+	<li>Alias of blog. (Blog that the name is &quot;My Weblog&quot; can be displayed as &quot;Home&quot;. )</li>
+	<li>Addition of BlogMenu template variable by module</li>
+</ul>
+</div>
+
+<div class="section" id="callplugin">
+<h3>Attention of another plugin call function</h3>
+
+<p>Other plugins can be called by writing <code>&lt;%%PLUGIN_NAME%%&gt;</code> and <code>&lt;%%PLUGIN_NAME(OPTION1,OPTION2)%%&gt;</code> in the template of blog list item and category list. It is also possible to use the template variable of BlogMenu for the option value. At this time, the blog under parsing pretends current selected blog. However, there are the following notes about this use. </p>
+
+<ol>
+	<li><p>In a blog specified that does not expand the category list by the parameter of a skin variable, other plugins are not called. Please <strong>put a "+" (plus) on the head of the plugin name</strong> to always call it. (<code>&lt;%%+PLUGIN_NAME%%&gt;</code>)</p></li>
+	
+	<li><p>To achieve &quot;the blog under parsing pretends current selected blog&quot; (Most plugins do not move according to the expectation if this is not done), <strong>$blog of the global variable is temporarily rewritten</strong>. As a result, there might be an influence in another unrelated plugin. First of all, please doubt this when Nucleus is strange. </p></li>
+</ol>
+</div>
+
+<div class="section" id="pluginoption">
+<h3>Plugin Option Items</h3>
+
+<ul>
+	<li>Default display order of blogs that has the same display priority</li>
+	<li>Default display order of categories that has the same display priority</li>
+	<li>URL parameter order of categories (catid -&gt; blogid or blogid -&gt; catid</li>
+	<li>A-1 : Add blogid to default blog URL.</li>
+	<li>A-2 : Add blogid to its category URLs.</li>
+	<li>B-1 : When a blog URL is different from default blog URL, add blogid to the URL.</li>
+	<li>B-2 : Add blogid to its category URLs.</li>
+	<li>[URLMode:Normal] Add "index.php" at beginning of query strings when a blog URL ends with "/"</li>
+	<li>Show category priority settings in blog settings page. (If you set this to "Yes", BlogAdmin is allowed to edit the display priority of categories at "Blog Setting" page of Nucleus.)</li>
+	<li>Show in quick menu</li>
+	<li>Delete database tables of this plugin when uninstalling.</li>
+</ul>
+</div>
+
+<div class="section" id="management">
+<h3>Operation that can be done on plugin management page</h3>
+
+<ul>
+	<li>Enable/Disable switch of modules</li>
+	<li>Default display priority of blogs/categories</li>
+	<li>Number of levels of priority that can be specified</li>
+	<li>Display priority of each blog/category</li>
+	<li>Template edit</li>
+</ul>
+
+<p>Please refer to pop up help in BlogMenu management page for details. </p>
+</div>
+
+<div class="section" id="skinvar">
+<h3>Skin Variables</h3>
+
+<pre>
+<code>&lt;%BlogMenu(<strong>template_name</strong>,<i>expand_option</i>,<i>blog_visible</i>,<i>archive_narrow</i>,<i>blog_order</i>,<i>category_order</i>)%&gt;</code>
+
+e.g. <code>&lt;%BlogMenu(default)%&gt;</code>
+e.g. <code>&lt;%BlogMenu(default,@)%&gt;</code>
+e.g. <code>&lt;%BlogMenu(mytemplate,,1/2/3,1)%&gt;</code>
+e.g. <code>&lt;%BlogMenu(mytemplate,&lt;&gt;2,,0,bnumber asc,cname asc)%&gt;</code>
+</pre>
+
+<dl>
+	<dt>template_name (required)</dt>
+	<dd><p>Name of template create in BlogMenu management.</p></dd>
+	
+	<dt>expand_option</dt>
+	<dd>
+		<ul>
+			<li><p><code>@</code> ... displays the category list and other plugins only in blog under the selection. &lt;%%categorylist%%&gt; and plugins are ignored in other blogs.</p></li>
+			<li><p><code>1/2/5</code> ... displays the category list and other plugins in blogs that have specified ID. Put a slash between blogIDs.</p></li>
+			<li><p><code>&lt;&gt;3/4</code> ... doesn't display the category list and other plugins in blogs that have specified ID. Put a slash between blogIDs.</p></li>
+		</ul>
+		<p>If you want always to call a plugin regardless of this setting, <strong>put a "+" (plus) on the head of the plugin name</strong>. (<code>&lt;%%+PLUGIN_NAME%%&gt;</code>)</p>
+	</dd>
+
+	<dt>blog_visible</dt>
+	<dd>
+		<ul>
+			<li><p><code>1/2/5</code> ... displays only blogs that have specified ID in blog list. Put a slash between blogIDs.</p></li>
+			<li><p><code>&lt;&gt;3/4</code> ... doesn't display blogs that have specified ID in blog list. Put a slash between blogIDs.</p></li>
+		</ul>
+	</dd>
+	
+	<dt>archive_narrow</dt>
+	<dd>
+		<p>Whether BlogMenu puts archive/archivelist parameters on URL. When &quot;1&quot; is specified, only categories and the number of items that exists for the period are displayed in archive skin. However, the setting of not adding blogid of Plugin Option is ignored in this case.</p>
+		
+		<ul>
+			<li><p><code>1</code> ... yes</p></li>
+			<li><p><code>0</code> ... no</p></li>
+		</ul>
+	</dd>
+	
+	<dt>blog_order</dt>
+	<dd>
+		<p>The order of row when there are two or more blogs of the same display priority</p>
+		<ul>
+			<li><code>bnumber asc</code></li>
+			<li><code>bnumber desc</code></li>
+			<li><code>bname asc</code></li>
+			<li><code>bname desc</code></li>
+		</ul>
+	</dd>
+	
+	<dt>category_order</dt>
+	<dd>
+		<p>The order of row when there are two or more categories of the same display priority</p>
+		<ul>
+			<li><code>catid asc</code></li>
+			<li><code>catid desc</code></li>
+			<li><code>cname asc</code></li>
+			<li><code>cname desc</code></li>
+		</ul>
+	</dd>
+</dl>
+</div>
+

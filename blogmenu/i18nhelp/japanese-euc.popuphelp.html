@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-JP" />
+	<title>Nucleusプラグイン管理用ヘルプ</title>
+	<style type="text/css">
+	<!--
+		body {
+			font-family: verdana, arial;
+			font-size: small;
+		}
+
+		h1 {
+			font-size: large;
+			border-bottom: 1px gray dashed;
+			color: #596d9d;
+			text-align: left;
+		}
+
+		h2 {
+			font-size: medium;
+			border: 1px solid #ddd;
+			background-color: whitesmoke;
+			text-align: left;
+		}
+
+		.page {
+			height: 800px;
+			margin-bottom: 100px;
+		}
+
+		pre {
+			background-color: #ddd;
+			padding: 5px;
+			font-size: small;
+		}
+
+		.example {
+			background-color: #ddd;
+			padding: 5px;
+		}
+
+		ul.templates {
+			font-size: x-small;
+			line-height: 1.1;
+			list-style: none;
+			text-indent: -20px;
+			margin-left: 20px;
+		}
+
+		ul {
+			text-align: left;
+		}
+
+		a:link, a:visited {
+			color: #1D3565;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+
+		a:hover {
+			background-color: whitesmoke;
+		}
+
+		.deprecated {
+			border: 3px solid red;
+			padding: 5px;
+			font-size: medium;
+		}
+
+		tt, code {
+			font-size: small;
+		}
+
+		table {
+			border: 1px solid #ccc;
+		}
+
+		th {
+			background-color: #eee;
+		}
+
+		td {
+			vertical-align: top;
+		}
+
+		.note {
+			background-color: #eee;
+			padding: 5px;
+		}
+		
+		.var {
+		    white-space:nowrap;
+		}
+	-->
+	</style>
+</head>
+<body>
+
+<div class="page">
+<h1>Nucleusプラグインポップアップ・ヘルプ</h1>
+</div>
+
+
+<div class="page">
+<a name="name"></a>
+<h1>テンプレートの名前</h1>
+
+<p>テンプレートの名前は、aからzと0から9のみで構成され、かつスペースを含まないものを付けてください。</p>
+</div>
+
+
+<div class="page">
+<a name="bloglist"></a>
+<h1>ブログリストテンプレート</h1>
+
+<p>以下のテンプレート変数が利用できます</p>
+
+<h2>全てのパーツで利用可能な変数</h2>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td>&lt;%skinfile%&gt;</td>
+	<td>スキンフォルダのURL。&lt;%skinfile(ファイル名)%&gt;形式も可</td>
+</tr></table>
+
+<h2>ブログリスト本体で利用可能な変数</h2>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td class="var">&lt;%blogid%&gt;</td>
+	<td>ブログID</td>
+</tr><tr>
+	<td class="var">&lt;%bloglink%&gt;</td>
+	<td>ブログのリンク（URLのみ）。通常はこちらを使います。</td>
+</tr><tr>
+	<td class="var">&lt;%archivedate%&gt;</td>
+	<td>現在のスキンがアーカイブであるときのみ、URLのarchiveの値が出力されます。</td>
+</tr><tr>
+	<td class="var">&lt;%blogurl%&gt;</td>
+	<td>Nucleusのブログ設定ページで設定したブログのURLそのもの。空の場合のみデフォルトブログのURLが使われます。もしデフォルトブログのURLも空の場合は$CONF['Self']の値になります。</td>
+</tr><tr>
+	<td class="var">&lt;%blogname%&gt;</td>
+	<td>ブログの名前</td>
+</tr><tr>
+	<td class="var">&lt;%bshortname%&gt;</td>
+	<td>ブログの短縮名</td>
+</tr><tr>
+	<td class="var">&lt;%blogdesc%&gt;</td>
+	<td>ブログの説明</td>
+</tr><tr>
+	<td>&lt;%flag%&gt;</td>
+	<td>そのブログが現在選択されているときだけ、「<a href="#flag">カレントブログのフラグ</a>」で設定した内容がこの部分に出力されます。</td>
+</tr><tr>
+	<td class="var">&lt;%self%&gt;</td>
+	<td>$CONF['Self']の値</td>
+</tr><tr>
+	<td class="var">&lt;%%categorylist%%&gt;</td>
+	<td>そのブログのカテゴリーリスト（<a href="#module">モジュール</a>が有効であるときのみ）。%が２つであることに注意。「<a href="#categorylist">カテゴリーリストテンプレート</a>」で設定した形式で表示されます。</td>
+</tr><tr>
+	<td class="var">&lt;%%プラグイン名%%&gt;</td>
+	<td>そのブログが選択されているという設定でNucleusのプラグインを呼び出します。%が２つであることに注意。パラメーターも普通に書くことができます。また、プラグインのパラメーター値にBlogMenuのテンプレート変数を使うことも可能です。ただしうまく働かないプラグインもあります。</td>
+</tr><tr>
+	<td class="var">&lt;%%+プラグイン名%%&gt;</td>
+	<td>頭に「+」を付けると、BlogMenuのスキン変数のパラメーター指定により展開しない設定になっているブログでも、プラグインを常に呼び出します。他は上と同じです。</td>
+</tr><tr>
+</tr></table>
+
+<h2>ブログリストのフラグで利用可能な変数</h2>
+<p>&lt;%flag%&gt; とプラグイン以外の、ブログリスト、リスト本体で利用可能な変数が使用できます。</p>
+
+</div>
+
+<div class="page">
+<a name="aliases"></a>
+<h1>ブログの別名</h1>
+
+<p>たとえば、既定のブログの名前は「My Weblog」ですが、BlogMenuでは「Home」として表示させたい時に設定します。１ブログに付き１行で、以下の形式で記述します。</p>
+<pre><code>ブログID=別名</code></pre>
+e.g.
+<pre><code>1=Home
+5=付録</code></pre>
+
+</div>
+
+<div class="page">
+<a name="categorylist"></a>
+<h1>カテゴリーリストテンプレート</h1>
+
+<p>以下のテンプレート変数が利用できます</p>
+
+<h2>全てのパーツで利用可能な変数</h2>
+<table><tr>
+	<th>テンプレート変数</th>
+	<th>説明</th>
+</tr><tr>
+	<td>&lt;%skinfile%&gt;</td>
+	<td>スキンフォルダのURL。&lt;%skinfile(ファイル名)%&gt;形式も可</td>
+</tr><tr>
+	<td class="var">&lt;%blogid%&gt;</td>
+	<td>ブログID</td>
+</tr><tr>
+	<td class="var">&lt;%bloglink%&gt;</td>
+	<td>ブログのリンク（URLのみ）。通常はこちらを使います。</td>
+</tr><tr>
+	<td class="var">&lt;%archivedate%&gt;</td>
+	<td>現在のスキンがアーカイブであるときのみ、URLのarchiveの値が出力されます。</td>
+</tr><tr>
+	<td class="var">&lt;%blogurl%&gt;</td>
+	<td>Nucleusのブログ設定ページで設定したブログのURLそのもの。空の場合のみデフォルトブログのURLが使われます。もしデフォルトブログのURLも空の場合は$CONF['Self']の値になります。</td>
+</tr><tr>
+	<td class="var">&lt;%blogname%&gt;</td>
+	<td>ブログの名前</td>
+</tr><tr>
+	<td class="var">&lt;%bshortname%&gt;</td>
+	<td>ブログの短縮名</td>
+</tr><tr>
+	<td class="var">&lt;%blogdesc%&gt;</td>
+	<td>ブログの説明</td>
+</tr><tr>
+	<td class="var">&lt;%self%&gt;</td>
+	<td>$CONF['Self']の値</td>
+</tr><tr>
+	<td class="var">&lt;%%プラグイン名%%&gt;</td>
+	<td>そのブログが選択されているという設定でNucleusのプラグインを呼び出します。%が２つであることに注意。パラメーターも普通に書くことができます。また、プラグインのパラメーター値にBlogMenuのテンプレート変数を使うことも可能です。ただしうまく働かないプラグインもあります。</td>
+</tr></table>
+
+<h2>カテゴリーリスト本体で利用可能な変数</h2>
+<table><tr>
+	<td class="var">&lt;%catid%&gt;</td>
+	<td>カテゴリーID</td>
+</tr><tr>
+	<td class="var">&lt;%catlink%&gt;</td>
+	<td>カテゴリーのリンク（URLのみ）</td>
+</tr><tr>
+	<td class="var">&lt;%catname%&gt;</td>
+	<td>カテゴリーの名前</td>
+</tr><tr>
+	<td class="var">&lt;%catdesc%&gt;</td>
+	<td>カテゴリーの説明</td>
+</tr><tr>
+	<td class="var">&lt;%amount%&gt;</td>
+	<td>そのカテゴリーの記事数</td>
+</tr><tr>
+	<td>&lt;%catflag%&gt;</td>
+	<td>そのカテゴリーが現在選択されているときだけ、「<a href="#flag">カレントカテゴリーのフラグ</a>」で設定した内容がこの部分に出力されます。</td>
+</tr></table>
+
+<h2>カテゴリーリストのフラグで利用可能な変数</h2>
+<p>&lt;%catflag%&gt; とプラグイン以外の、カテゴリーリスト、リスト本体で利用可能な変数が使用できます。</p>
+
+</div>
+
+
+<div class=page>
+<a name="flag"></a>
+<h1>カレントのフラグ</h1>
+
+<p>ここで設定した内容がテンプレートのそれぞれ<br /><br />
+<tt>&lt;%flag%&gt;</tt>(ブログリスト)<br /><br />
+<tt>&lt;%catflag%&gt;</tt>(カテゴリーリスト)<br /><br />
+の部分に、<strong>そのブログ、カテゴリーが現在選択されている時のみ</strong>出力されます。選択されていないブログ、カテゴリーでは何も出力されません。</p>
+
+</div>
+
+
+<div class=page>
+<a name="rank"></a>
+<h1>表示優先度</h1>
+
+<p>好きな順番に表示順を並べ替えることができます。数字の少ないものが上に来ます。同じ優先度のものが複数ある場合は、プラグインオプションの</p>
+<ul>
+<li>同じ表示優先度を持つブログの表示順</li>
+<li>同じ表示優先度を持つカテゴリーの表示順</li>
+</ul>
+<p>という項目にて設定された順序にしたがって表示されます。</p>
+<p>また、優先度選択リストの一番下に、「非表示」という項目があります。これを選択するとそのカテゴリーを隠すことができます。</p>
+
+</div>
+
+<div class=page>
+<a name="module"></a>
+<h1>モジュール</h1>
+
+<p>一定の書式にしたがったPHPクラスのファイルを<tt>blogmenu/modules</tt>ディレクトリに置くと、モジュールとしてテンプレートから呼び出すことができます。ただし、最初に「有効」にする必要があります。
+インストール直後は「categorylist」というモジュールが有効になっています。</p>
+
+</div>
+
+<div class=page>
+<a name="rankbasic"></a>
+<h1>表示優先度の基本設定</h1>
+
+<dl>
+<dt>既定の優先度</dt>
+<dd><p>新しく作られたブログ・カテゴリーはこの優先度に設定されます</p></dd>
+
+<dt>設定できる優先度の段階数</dt>
+<dd><p>ここの数値を増やすと、優先度選択リストで選べる数値がその数に増えます（999まで）。減らした場合、もし既にあるブログ・カテゴリーでそれより大きな優先度を設定されているものがある時は、新しい段階範囲の一番大きな値に変更されます。</p></dd>
+
+</dl>
+</div>
+
