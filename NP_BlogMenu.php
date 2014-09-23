@@ -115,8 +115,8 @@ class NP_BlogMenu extends NucleusPlugin
 		if (!isset($this->templates[$name])) {
 			$res = sql_query('SELECT * FROM '.sql_table('plug_blogmenu_template')
 			     . ' WHERE tname="' . addslashes($name) . '"');
-			if ($res && mysql_num_rows($res) > 0) {
-				$this->templates[$name] = mysql_fetch_assoc($res);
+			if ($res && sql_num_rows($res) > 0) {
+				$this->templates[$name] = sql_fetch_assoc($res);
 				$this->templates[$name] = array_map(array(&$this, '_parseSkinfile'), $this->templates[$name]);
 			} else {
 				$this->templates[$name] = false;
@@ -218,7 +218,7 @@ class NP_BlogMenu extends NucleusPlugin
 			. ' WHERE c.cblog='.intval($blogid).' and r.rcid=c.catid and r.rcontext="category"'
 			. ' ORDER BY r.rank ASC, '.$order;
 		$res = sql_query($query);
-		while ($a = mysql_fetch_assoc($res)) {
+		while ($a = sql_fetch_assoc($res)) {
 			$rank[] = $a;
 		}
 		
@@ -280,10 +280,10 @@ class NP_BlogMenu extends NucleusPlugin
 		$defrank = $this->getOption('defblogrank');
 		if (!$defrank) $defrank = $this->getInstallDefBlogRank();
 		
-		$res = mysql_query('INSERT INTO '.sql_table('plug_blogmenu_rank').' SET '
+		$res = sql_query('INSERT INTO '.sql_table('plug_blogmenu_rank').' SET '
 						   . 'rcid='.intval($blogid).', rank='.intval($defrank).', rcontext="blog"');
 		if(!$res) {
-			ACTIONLOG::add(WARNING, 'NP_BlogMenu : '.mysql_error());
+			ACTIONLOG::add(WARNING, 'NP_BlogMenu : '.sql_error());
 		}
 	}
 	
@@ -291,28 +291,28 @@ class NP_BlogMenu extends NucleusPlugin
 		$defrank = $this->getOption('defcatrank');
 		if (!$defrank) $defrank = $this->getInstallDefCatRank();
 		
-		$res = mysql_query('INSERT INTO '.sql_table('plug_blogmenu_rank').' SET '
+		$res = sql_query('INSERT INTO '.sql_table('plug_blogmenu_rank').' SET '
 				. 'rcid='.intval($data['catid']).', rank='.intval($defrank).', rcontext="category"');
 		if(!$res) {
-			ACTIONLOG::add(WARNING, 'NP_BlogMenu : '.mysql_error());
+			ACTIONLOG::add(WARNING, 'NP_BlogMenu : '.sql_error());
 		}
 	}
 
 	function event_PostDeleteBlog($data) {
-		$res = mysql_query('DELETE FROM '.sql_table('plug_blogmenu_rank')
+		$res = sql_query('DELETE FROM '.sql_table('plug_blogmenu_rank')
 						   .' WHERE rcontext="blog"'
 						   .' and rcid='.intval($data['blogid']));
 		if(!$res) {
-			ACTIONLOG::add(WARNING, 'NP_BlogMenu : '.mysql_error());
+			ACTIONLOG::add(WARNING, 'NP_BlogMenu : '.sql_error());
 		}
 	}
 	
 	function event_PostDeleteCategory($data) {
-		$res = mysql_query('DELETE FROM '.sql_table('plug_blogmenu_rank')
+		$res = sql_query('DELETE FROM '.sql_table('plug_blogmenu_rank')
 						   .' WHERE rcontext="category"'
 						   .' and rcid='.intval($data['catid']));
 		if(!$res) {
-			ACTIONLOG::add(WARNING, 'NP_BlogMenu : '.mysql_error());
+			ACTIONLOG::add(WARNING, 'NP_BlogMenu : '.sql_error());
 		}
 	}
 
@@ -407,7 +407,7 @@ class NP_BlogMenu extends NucleusPlugin
 		$aliases = $this->_getBnameAliases($tp);
 		
 		$res = sql_query($query);
-		while ($data = mysql_fetch_assoc($res)) {
+		while ($data = sql_fetch_assoc($res)) {
 
 			if (!$data['blogurl']) {
 				$data['blogurl'] = $defblogurl;
@@ -548,7 +548,7 @@ class NP_BlogMenu extends NucleusPlugin
 			$this->_replaceConfURL($OLD_BLOGURL);
 		}
 		
-		mysql_free_result($res);
+		sql_free_result($res);
 		
 		echo $tp['blogfooter'];
 		

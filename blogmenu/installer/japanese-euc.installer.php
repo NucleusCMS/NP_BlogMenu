@@ -62,10 +62,10 @@ class BlogMenuInstaller
 			. ' LEFT JOIN '.sql_table('plug_blogmenu_rank').' as r'
 			. ' ON b.bnumber=r.rcid and r.rcontext="blog" WHERE r.rcid IS NULL';
 		$res = sql_query($query);
-		$total = mysql_num_rows($res);
+		$total = sql_num_rows($res);
 		$tmp = '';
 		$i = 1;
-		while ($row = mysql_fetch_row($res)) {
+		while ($row = sql_fetch_row($res)) {
 			if ($total == 1 || $i >= 100) {
 				sql_query('INSERT INTO '.sql_table('plug_blogmenu_rank').' (rcontext,rcid,rank) VALUES '.$tmp.' ("blog",'.intval($row[0]).','.$rcnf['blogdefault'].')');
 				$tmp = '';
@@ -81,7 +81,7 @@ class BlogMenuInstaller
 			. ' LEFT JOIN '.sql_table('blog').' as b'
 			. ' ON r.rcid=b.bnumber WHERE r.rcontext="blog" and b.bnumber IS NULL';
 		$res = sql_query($query);
-		while ($row = mysql_fetch_row($res)) {
+		while ($row = sql_fetch_row($res)) {
 			sql_query('DELETE FROM '.sql_table('plug_blogmenu_rank').' WHERE rcid='.intval($row[0]).' AND rcontext="blog"');
 		}
 		
@@ -90,10 +90,10 @@ class BlogMenuInstaller
 			. ' LEFT JOIN '.sql_table('plug_blogmenu_rank').' as r'
 			. ' ON c.catid=r.rcid and r.rcontext="category" WHERE r.rcid IS NULL';
 		$res = sql_query($query);
-		$total = mysql_num_rows($res);
+		$total = sql_num_rows($res);
 		$tmp = '';
 		$i = 1;
-		while ($row = mysql_fetch_row($res)) {
+		while ($row = sql_fetch_row($res)) {
 			if ($total <= 1 || $i >= 100) {
 				sql_query('INSERT INTO '.sql_table('plug_blogmenu_rank').' (rcontext,rcid,rank) VALUES '.$tmp.' ("category",'.intval($row[0]).','.$rcnf['catdefault'].')');
 				$tmp = '';
@@ -109,7 +109,7 @@ class BlogMenuInstaller
 			. ' LEFT JOIN '.sql_table('category').' as c'
 			. ' ON r.rcid=c.catid WHERE r.rcontext="category" and c.catid IS NULL';
 		$res = sql_query($query);
-		while ($row = mysql_fetch_row($res)) {
+		while ($row = sql_fetch_row($res)) {
 			sql_query('DELETE FROM '.sql_table('plug_blogmenu_rank').' WHERE rcid='.intval($row[0]).' AND rcontext="blog"');
 		}
 		

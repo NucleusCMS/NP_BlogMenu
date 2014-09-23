@@ -67,7 +67,7 @@ class BMModule_categorylist
 		
 		$cres = sql_query($query);
 		
-		while ($cdata = mysql_fetch_assoc($cres)) 
+		while ($cdata = sql_fetch_assoc($cres)) 
 		{
 			if ($narrow && ($skinType == 'archive' || $skinType == 'archivelist'))
 			{
@@ -127,7 +127,7 @@ class BMModule_categorylist
 		
 		}
 
-		mysql_free_result($cres);
+		sql_free_result($cres);
 				
 		$this->fill($plugin, $data, $skinType, $tp['catfooter'], $pageblogid);
 	}

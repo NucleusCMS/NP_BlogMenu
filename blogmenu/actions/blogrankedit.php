@@ -23,7 +23,7 @@ class BlogMenu_blogrankedit
 			. ' WHERE r.rcid=b.bnumber and r.rcontext="blog"'
 			. ' ORDER BY r.rank ASC, '.$order;
 		$res = sql_query($query);
-		while ($a = mysql_fetch_assoc($res)) {
+		while ($a = sql_fetch_assoc($res)) {
 			$rank[] = $a;
 		}
 		

@@ -33,13 +33,13 @@ class PlugTemplate
 	function exists($name)
 	{
 		$res = sql_query('SELECT * FROM '.$this->table.' WHERE '.$this->namekey.'="'.addslashes($name).'"');
-		return (mysql_num_rows($res) != 0);
+		return (sql_num_rows($res) != 0);
 	}
 	
 	function existsID($id)
 	{
 		$res = sql_query('select * FROM '.$this->table.' WHERE '.$this->idkey.'='.intval($id));
-		return (mysql_num_rows($res) != 0);
+		return (sql_num_rows($res) != 0);
 	}
 
 	function getTemplateList($w='', $s='')
@@ -54,7 +54,7 @@ class PlugTemplate
 
 		$res = sql_query($query);
 		$templates = array();
-		while ($a = mysql_fetch_assoc($res)) {
+		while ($a = sql_fetch_assoc($res)) {
 			$templates[] = $a;
 		}
 		return $templates;
@@ -68,21 +68,21 @@ class PlugTemplate
 		$query .= ' FROM '.$this->table. $where .' ORDER BY '.$this->namekey;
 
 		$res = sql_query($query);
-		return mysql_fetch_assoc($res);
+		return sql_fetch_assoc($res);
 	}
 
 	function read($name)
 	{
 		$query = 'SELECT * FROM '.$this->table.' WHERE '.$this->namekey.'="'.addslashes($name).'"';
 		$res = sql_query($query);
-		return mysql_fetch_assoc($res);
+		return sql_fetch_assoc($res);
 	}
 
 	function readFromID($id)
 	{
 		$query = 'SELECT * FROM '.$this->table.' WHERE '.$this->idkey.'='.intval($id);
 		$res = sql_query($query);
-		return mysql_fetch_assoc($res);
+		return sql_fetch_assoc($res);
 	}
 
 	function createTemplate($name, $desc='')
@@ -90,7 +90,7 @@ class PlugTemplate
 		$query = 'INSERT INTO '.$this->table.' SET '.$this->namekey.'="'. addslashes($name).'"';
 		if ($desc && $this->desckey) $query .= ', '.$this->desckey.'="'.addslashes($desc).'"';
 		sql_query($query);
-		$newid = mysql_insert_id();
+		$newid = sql_insert_id();
 		return $newid;
 	}
 

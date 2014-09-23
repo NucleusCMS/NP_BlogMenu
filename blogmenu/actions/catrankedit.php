@@ -32,7 +32,7 @@ class BlogMenu_catrankedit
 			. ' WHERE c.cblog='.intval($blogid).' and r.rcid=c.catid and r.rcontext="category"'
 			. ' ORDER BY r.rank ASC, '.$order;
 		$res = sql_query($query);
-		while ($a = mysql_fetch_assoc($res)) {
+		while ($a = sql_fetch_assoc($res)) {
 			$rank[] = $a;
 		}
 		
