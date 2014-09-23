@@ -12,24 +12,14 @@ class NP_BlogMenu extends NucleusPlugin
 	function getAuthor() { return 'Taka'; }
 	function getURL() { return ''; }
 	function getVersion() { return '0.1.1'; }
-	function getMinNucleusVersion() { return '3.22'; }
+	function getMinNucleusVersion() { return '350'; }
 	function getMinNucleusPatchLevel() { return 0; }
 	function getDescription ()
 	{
 		return 'Bloglist, Categorylist';
 	}
 	
-	function supportsFeature($what)
-	{
-		switch ($what) {
-			case 'SqlTablePrefix':
-				return 1;
-			case 'HelpPage':
-				return 1;
-			default:
-				return 0;
-		}
-	}
+	function supportsFeature($what) {return in_array($what,array('SqlApi','SqlTablePrefix','HelpPage'))}
 	
 	function hasAdminArea() { return 1; }
 	
