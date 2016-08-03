@@ -19,7 +19,7 @@ class NP_BlogMenu extends NucleusPlugin
 		return 'Bloglist, Categorylist';
 	}
 	
-	function supportsFeature($what) {return in_array($what,array('SqlApi','SqlTablePrefix','HelpPage'))}
+	function supportsFeature($what) {return in_array($what,array('SqlApi','SqlTablePrefix','HelpPage'));}
 	
 	function hasAdminArea() { return 1; }
 	
