@@ -4,7 +4,7 @@ class PlugController
 {
 	var $admin;
 	
-	function PlugController($plugin_name)
+	function __construct($plugin_name)
 	{
 		$adminclass = $plugin_name . '_Management';
 		$this->admin = new $adminclass($plugin_name);
