@@ -203,6 +203,3 @@ class PlugAdminView extends PlugView
 	}
 
 }
-
-
-?>

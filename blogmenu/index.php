@@ -23,6 +23,3 @@
 
 	$MyTagsController = new PlugController('BlogMenu');
 	$MyTagsController->forward(requestVar('action'));
-
-
-?>

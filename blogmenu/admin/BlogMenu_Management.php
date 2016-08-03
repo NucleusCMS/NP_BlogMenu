@@ -57,5 +57,3 @@ class BlogMenu_Management extends PlugManagement
 	}
 	
 }
-
-?>
