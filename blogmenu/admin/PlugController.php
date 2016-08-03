@@ -54,7 +54,7 @@ class PlugController
 			$obj = new $class();
 			
 			if (method_exists($obj, "execute")) {
-				$obj->execute(&$this, $msg);
+				$obj->execute($this, $msg);
 				
 			} else {
 				$this->admin->error('Method not found.');

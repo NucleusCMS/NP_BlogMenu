@@ -37,7 +37,7 @@ class BlogMenu_Management extends PlugManagement
 	
 	function &getTpManager() {
 		if (!$this->tpmanager) {
-			$this->tpmanager =& new PlugTemplate(sql_table('plug_blogmenu_template'), 'tid', 'tname', 'tdesc');
+			$this->tpmanager = new PlugTemplate(sql_table('plug_blogmenu_template'), 'tid', 'tname', 'tdesc');
 		}
 		return $this->tpmanager;
 	}
