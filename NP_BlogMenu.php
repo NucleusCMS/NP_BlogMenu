@@ -630,7 +630,7 @@ class NP_BlogMenu extends NucleusPlugin
 	}
 	
 	function _printDisallow($name) {
-		echo '<strong>BM DISALLOW ('.htmlspecialchars($name).')</strong>';
+		echo '<strong>BM DISALLOW ('.hsc($name).')</strong>';
 	}
 
 }
