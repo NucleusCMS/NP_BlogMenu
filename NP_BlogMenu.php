@@ -104,7 +104,7 @@ class NP_BlogMenu extends NucleusPlugin
 	{
 		if (!isset($this->templates[$name])) {
 			$res = sql_query('SELECT * FROM '.sql_table('plug_blogmenu_template')
-			     . ' WHERE tname="' . addslashes($name) . '"');
+			     . ' WHERE tname="' . sql_real_escape_string($name) . '"');
 			if ($res && sql_num_rows($res) > 0) {
 				$this->templates[$name] = sql_fetch_assoc($res);
 				$this->templates[$name] = array_map(array(&$this, '_parseSkinfile'), $this->templates[$name]);
@@ -391,7 +391,7 @@ class NP_BlogMenu extends NucleusPlugin
 		if (isset($static_order)) {
 			$query .= ' ' . $static_order;
 		} else {
-			$query .= ' ORDER BY r.rank, b.' . addslashes($blogorder);
+			$query .= ' ORDER BY r.rank, b.' . sql_real_escape_string($blogorder);
 		}
 		
 		$aliases = $this->_getBnameAliases($tp);
