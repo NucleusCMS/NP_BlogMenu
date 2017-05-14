@@ -11,7 +11,7 @@ class NP_BlogMenu extends NucleusPlugin
 	function getName() { return 'Blog Menu'; }
 	function getAuthor() { return 'Taka'; }
 	function getURL() { return ''; }
-	function getVersion() { return '0.1.1'; }
+	function getVersion() { return '0.2'; }
 	function getMinNucleusVersion() { return '350'; }
 	function getMinNucleusPatchLevel() { return 0; }
 	function getDescription ()
