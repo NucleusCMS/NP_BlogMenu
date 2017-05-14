@@ -6,7 +6,7 @@ if (!class_exists("PlugView")) {
 <h2><?php echo $plugin['name'] ?></h2>
 
 <?php if ($message): ?>
-  <p class="batchoperations" style="text-align:left"><?php echo htmlspecialchars($message) ?></p>
+  <p class="batchoperations" style="text-align:left"><?php echo hsc($message) ?></p>
 <?php endif; ?>
 
 <ul>
@@ -21,7 +21,7 @@ if (!class_exists("PlugView")) {
 
 <p>
 	<strong><a href="<?php echo $plugin['url'] ?>index.php?action=blogrankedit"><?php echo __NP_RANK_EDIT_TITLE ?></a> &raquo;
-	<img src='images/globe.gif' width='13' height='13' alt='' /> <?php echo htmlspecialchars($blogname) ?></strong>
+	<img src='images/globe.gif' width='13' height='13' alt='' /> <?php echo hsc($blogname) ?></strong>
 </p>
 
 <h3><?php echo __NP_CATRANK_EDIT_TITLE . $popup['rank'] ?></h3>

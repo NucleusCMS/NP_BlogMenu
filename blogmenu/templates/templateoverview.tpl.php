@@ -6,7 +6,7 @@ if (!class_exists("PlugView")) {
 <h2><?php echo $plugin['name'] ?></h2>
 
 <?php if ($message): ?>
-  <p class="batchoperations" style="text-align:left"><?php echo htmlspecialchars($message) ?></p>
+  <p class="batchoperations" style="text-align:left"><?php echo hsc($message) ?></p>
 <?php endif; ?>
 
 <ul>
@@ -34,7 +34,7 @@ if (!class_exists("PlugView")) {
 	<?php foreach ($templates as $t): ?>
 		<tr onmouseover='focusRow(this);' onmouseout='blurRow(this);'>
 		  <td><?php echo $t['name'] ?></td>
-	<td><?php echo htmlspecialchars($t['description']) ?></td>
+	<td><?php echo hsc($t['description']) ?></td>
 		  <td><a href="<?php echo $plugin['url'] ?>index.php?action=templateedit&amp;tid=<?php echo $t['id'] ?>"><?php echo _LISTS_EDIT ?></a></td>
 		  <td><a href="<?php echo $plugin['url'] ?>index.php?action=templateclone&amp;tid=<?php echo $t['id'] ?>"><?php echo _LISTS_CLONE ?></a></td>
 		  <td><a href="<?php echo $plugin['url'] ?>index.php?action=templatedelete&amp;tid=<?php echo $t['id'] ?>"><?php echo _LISTS_DELETE ?></a></td>

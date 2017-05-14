@@ -7,7 +7,7 @@ if (!class_exists("PlugView")) {
 <h2><?php echo $plugin['name'] ?></h2>
 
 <?php if ($message): ?>
-	<p class="batchoperations" style="text-align:left"><?php echo htmlspecialchars($message) ?></p>
+	<p class="batchoperations" style="text-align:left"><?php echo hsc($message) ?></p>
 <?php endif; ?>
 
 <ul>

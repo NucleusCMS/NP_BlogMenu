@@ -126,7 +126,7 @@ class PlugManagement
 		$dir=$this->plugin->getAdminURL();
 		?>
 		<h2>Error!</h2>
-		<?php		echo htmlspecialchars($msg);
+		<?php		echo hsc($msg);
 		echo "<br />";
 		echo "<a href='".$dir."index.php' onclick='history.back()'>"._BACK."</a>";
 		
