@@ -44,7 +44,7 @@ class BMModule_categorylist
 				. ' and i.itime<' . mysqldate($timestamp_end)
 				. ' and i.idraft=0'
 				. ' GROUP BY c.catid'
-				. ' ORDER BY r.rank, c.'. addslashes($order);
+				. ' ORDER BY r.rank, c.'. sql_real_escape_string($order);
 		}
 		else
 		{
@@ -60,7 +60,7 @@ class BMModule_categorylist
 				. ' and i.itime<=' . mysqldate($b->getCorrectTime())
 				. ' and i.idraft=0'
 				. ' GROUP BY c.catid'
-				. ' ORDER BY r.rank, c.'. addslashes($order);
+				. ' ORDER BY r.rank, c.'. sql_real_escape_string($order);
 		}
 		
 		$this->fill($plugin, $data, $skinType, $tp['catheader'], $pageblogid);

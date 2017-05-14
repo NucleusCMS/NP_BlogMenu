@@ -64,7 +64,7 @@ class BlogMenu_rankupdate
 			}
 			$query = 'UPDATE '.sql_table('plug_blogmenu_rank').' SET'
 				. ' rank='.intval($v).' WHERE rcid='.intval($k)
-				. ' and rcontext="'.addslashes($type).'"';
+				. ' and rcontext="'.sql_real_escape_string($type).'"';
 			sql_query($query);
 		}
 	}
