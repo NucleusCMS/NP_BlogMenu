@@ -93,7 +93,7 @@ class NP_BlogMenu extends NucleusPlugin
 		if (file_exists($module_file)) {
 			include_once($module_file);
 			if (class_exists($module_class)) {
-				$this->modules[$name] =& new $module_class;
+				$this->modules[$name] = new $module_class;
 				return;
 			}
 		}
