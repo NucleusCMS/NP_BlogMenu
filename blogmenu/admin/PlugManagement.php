@@ -27,7 +27,7 @@ class PlugManagement
 	 * @param string $plugin_name : Name of Plugin
 	 * @return void
 	 */
-	function PlugManagement($plugin_name)
+	function __construct($plugin_name)
 	{
 		$this->p_admin = new PluginAdmin($plugin_name);
 		$this->plugin =& $this->p_admin->plugin;
@@ -185,7 +185,7 @@ class PlugAdminView extends PlugView
 {
 	var $p_manager;
 
-	function PlugAdminView(&$p_manager)
+	function __construct(&$p_manager)
 	{
 		$this->p_manager =& $p_manager;
 	}

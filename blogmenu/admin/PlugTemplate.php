@@ -7,7 +7,7 @@ class PlugTemplate
 	var $idkey;
 	var $desckey;
 	
-	function PlugTemplate($table, $primarykey, $namekey, $descriptionkey='')
+	function __construct($table, $primarykey, $namekey, $descriptionkey='')
 	{
 		$this->table = $table;
 		$this->idkey = '`'.$primarykey.'`';

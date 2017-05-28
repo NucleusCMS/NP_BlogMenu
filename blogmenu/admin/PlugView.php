@@ -5,7 +5,7 @@ class PlugView
 	var $vars = array();
 	var $tpl_file;
 	
-	function PlugView() {}
+	function __construct() {}
 
 	function assign($var, $value = null)
 	{
